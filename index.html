@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Chart</title>
+		<link rel="stylesheet" href="style.css" type="text/css" />
+		<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+	</head>
+	<body>
+		<script src="visualize.js"></script>
+
+        <script>
+            function generateDataset() {
+                var range = 50;
+                var startDate = new Date(Math.round(2010 + Math.random() * 5), Math.round(Math.random() * 12), 1);
+                var d = new Date(startDate);
+
+                var dataset = [];
+				while (startDate.getMonth() === d.getMonth()) {
+				    dataset.push([new Date(d), Math.round(Math.random() * range)]);
+					d.setDate(d.getDate() + 1);  // add one day
+				}
+                return dataset;
+            }
+
+           window.addEventListener('load', function () {
+                document.getElementById('generate').addEventListener('click', function (e) {
+                    document.getElementsByTagName('svg')[0].remove();
+                    visualize.createChart(generateDataset(), document.getElementsByTagName('body')[0]);
+                    e.preventDefault();
+                });
+
+                visualize.createChart(generateDataset(), document.getElementsByTagName('body')[0]);
+            });
+
+        </script>
+		<form>
+			<button id="generate" class="shiny-blue">Сгенерировать данные</button>
+		</form>
+	</body>
+</html>
