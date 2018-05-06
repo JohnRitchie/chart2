@@ -74,37 +74,32 @@ window.visualize = (function () {
                 elems[week_max].max = true;
             }
 
-
-
             // standardization
-            var yAxisScale = d3.scale.linear()
+            var yAxisScale = d3.scaleLinear()
                 .domain([0, d3.max(elems, function (d) {
                     return d.value
                 })])
                 .range([h - padding, padding]);
 
-            var xScale = d3.scale.ordinal()
+            var xScale = d3.scaleBand()
                 .domain(d3.range(elems.length))
-                .rangeRoundBands([padding, w - padding / 5]);
+                .rangeRound([padding, w - padding / 5])
+                .paddingInner(0.05);
 
-            var yScale = d3.scale.linear()
+            var yScale = d3.scaleLinear()
                 .domain([0, d3.max(elems, function (d) {
                     return d.value
                 })])
                 .range([padding, h - padding]);
 
 
-            var xAxis = d3.svg.axis()
-                .scale(xScale)
-                .orient("bottom")
+            var xAxis = d3.axisBottom(xScale)
                 .tickFormat(function (d, i) {
                     return elems[d].day + '.' + elems[d].month;
                 })
                 .tickSize(5);
 
-            var yAxis = d3.svg.axis()
-                .scale(yAxisScale)
-                .orient("left")
+            var yAxis = d3.axisLeft(yAxisScale)
                 .ticks(5);
 
             //Create SVG element
@@ -130,7 +125,7 @@ window.visualize = (function () {
                 .attr("y", function (d) {
                     return h - yScale(d.value);
                 })
-                .attr("width", xScale.rangeBand())
+                .attr("width", xScale.bandwidth())
                 .attr("height", function (d) {
                     return yScale(d.value) - padding;
                 })
@@ -162,7 +157,7 @@ window.visualize = (function () {
                     return "mid"
                 })
                 .attr("x", function (d, i) {
-                    return xScale(i) + xScale.rangeBand() / 2;
+                    return xScale(i) + xScale.bandwidth() / 2;
                 })
                 .attr("y", function (d) {
                     return h - yScale(d.value) - 5;

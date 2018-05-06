@@ -28,7 +28,6 @@ text.highlight[data-level='min'] {
 }
 text.highlight[data-level='mid'] {
     fill: black;
-    font-weight: 900;
     font-size: 11px;
 }
 button.shiny-blue { 
