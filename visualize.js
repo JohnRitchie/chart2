@@ -12,7 +12,7 @@ window.visualize = (function () {
             .classed("highlight", true);
     }
 
-    function unhighlight(eventObj) {
+    function unhighlight() {
         d3.selectAll("rect, text").classed('highlight', false);
     }
 
@@ -37,9 +37,9 @@ window.visualize = (function () {
                     'day': date.getDate(),
                     'month': date.getMonth() + 1,
                     'value': value,
-                    'weeknum': weeknum,
+                    'weeknum': weeknum
                 });
-                if (!week_max) {
+                if (week_max == null) {
                     week_max = i;
                     week_min = i;
                     week_max_value = value;
