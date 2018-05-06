@@ -77,7 +77,7 @@ window.visualize = (function () {
             // standardization
             var yAxisScale = d3.scaleLinear()
                 .domain([0, d3.max(elems, function (d) {
-                    return d.value
+                    return d.value;
                 })])
                 .range([h - padding, padding]);
 
@@ -88,7 +88,7 @@ window.visualize = (function () {
 
             var yScale = d3.scaleLinear()
                 .domain([0, d3.max(elems, function (d) {
-                    return d.value
+                    return d.value;
                 })])
                 .range([padding, h - padding]);
 
@@ -145,16 +145,16 @@ window.visualize = (function () {
                 .attr("text-anchor", "middle")
                 .attr("class", function (d) {
                     var cls = 'week' + d.weeknum;
-                    return cls
+                    return cls;
                 })
                 .attr("data-level", function (d) {
                     if (d.min) {
-                        return "min"
+                        return "min";
                     }
                     if (d.max) {
-                        return "max"
+                        return "max";
                     }
-                    return "mid"
+                    return "mid";
                 })
                 .attr("x", function (d, i) {
                     return xScale(i) + xScale.bandwidth() / 2;
@@ -194,6 +194,21 @@ window.visualize = (function () {
                 texts[i].addEventListener('mouseover', highlight);
                 texts[i].addEventListener('mouseleave', unhighlight);
             }
+
+            // Create title
+            var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+
+            svg.append("text")
+                .attr("x", (w / 2))
+                .attr("y", (d3.max(elems, function(d) {
+                    return d.value - (padding - 10)
+                })))
+                .attr("class", "title")
+                .attr("text-anchor", "middle")
+                .text(function() {
+                    return 'Revenue for ' + monthNames[elems[0].date.getMonth()] + ' ' + elems[0].date.getFullYear();
+                });
 
         }
     }
