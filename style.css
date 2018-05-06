@@ -17,12 +17,12 @@ body {
 	fill: orange;
 }
 text.highlight.max {
-	fill: red;
+	fill: green;
 	font-weight: 900;
 	font-size: 16px;
 }
 text.highlight.min {
-	fill: green;
+	fill: red;
 	font-weight: 900;
 	font-size: 16px;
 }
