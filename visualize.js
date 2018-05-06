@@ -39,7 +39,7 @@ window.visualize = (function () {
                     'value': value,
                     'weeknum': weeknum
                 });
-                if (week_max == null) {
+                if (week_max === null) {
                     week_max = i;
                     week_min = i;
                     week_max_value = value;
@@ -149,14 +149,17 @@ window.visualize = (function () {
                 })
                 .attr("text-anchor", "middle")
                 .attr("class", function (d) {
-                    var cls = 'text week' + d.weeknum;
+                    var cls = 'week' + d.weeknum;
+                    return cls
+                })
+                .attr("data-level", function (d) {
                     if (d.min) {
-                        cls += ' min'
+                        return "min"
                     }
                     if (d.max) {
-                        cls += ' max'
+                        return "max"
                     }
-                    return cls
+                    return "mid"
                 })
                 .attr("x", function (d, i) {
                     return xScale(i) + xScale.rangeBand() / 2;
@@ -189,6 +192,12 @@ window.visualize = (function () {
             for (var i = 0; i < rects.length; i++) {
                 rects[i].addEventListener('mouseover', highlight);
                 rects[i].addEventListener('mouseleave', unhighlight);
+            }
+
+            var texts = document.getElementsByTagName("text");
+            for (var i = 0; i < texts.length; i++) {
+                texts[i].addEventListener('mouseover', highlight);
+                texts[i].addEventListener('mouseleave', unhighlight);
             }
 
         }

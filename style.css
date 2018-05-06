@@ -16,17 +16,21 @@ body {
 .highlight {
 	fill: orange;
 }
-text.highlight.max {
+text.highlight[data-level='max'] {
 	fill: green;
 	font-weight: 900;
 	font-size: 16px;
 }
-text.highlight.min {
+text.highlight[data-level='min'] {
 	fill: red;
 	font-weight: 900;
 	font-size: 16px;
 }
-
+text.highlight[data-level='mid'] {
+    fill: black;
+    font-weight: 900;
+    font-size: 11px;
+}
 button.shiny-blue { 
 	  background-color: #759ae9;
 	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #759ae9), color-stop(50%, #376fe0), color-stop(50%, #1a5ad9), color-stop(100%, #2463de));
